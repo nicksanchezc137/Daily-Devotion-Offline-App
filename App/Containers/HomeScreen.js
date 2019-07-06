@@ -9,6 +9,7 @@ import styles from './Styles/HomeScreenStyle';
 import {ALL_DATA} from '../Services/Data';
 import DailyButton from '../Components/DailyButton';
 
+import Header from '../Components/Header';
 
 class HomeScreen extends Component {
   componentWillMount(){
@@ -23,17 +24,31 @@ class HomeScreen extends Component {
     }
   }
   renderDailyButton(){
-     ALL_DATA.map(()=>{
-
+   return  ALL_DATA.map((item)=>{
+      return(
+        <DailyButton 
+        title = {item.title}
+        subtitle = {item.subtitle}
+        onPress = {()=>{
+          this.props.navigation.navigate('GuideViewScreen',{
+            title:item.title,
+            day:item.day,
+            
+          });
+        }}
+        day = {item.day}/>
+      )
      }) 
   }
   render () {
     return (
       <View style={styles.container}>
       <Header heading = 'Home'/>
-       <Text>
-         hello
-       </Text>
+      <ScrollView style = {{alignSelf:'center',flex:1,flexDirection:'row'}} horizontal = {true}>
+        
+         {this.renderDailyButton()}
+        
+      </ScrollView>
       </View>
     )
   }
@@ -51,5 +66,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
-      import Header from '../Components/Header';
-
+     

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Text,TouchableOpacity } from 'react-native'
+import { View, Text,ImageBackground,TouchableNativeFeedback } from 'react-native'
 import styles from './Styles/DailyButtonStyle'
 
 export default class DailyButton extends Component {
@@ -17,11 +17,26 @@ export default class DailyButton extends Component {
 
   render () {
     return (
-      <TouchableOpacity>      
+      <TouchableNativeFeedback 
+       onPress = {this.props.onPress}
+      >      
       <View style={styles.container}>
-        <Text>{this.props.day}</Text>
+      <ImageBackground 
+      imageStyle={{borderTopLeftRadius: 28,
+         borderTopRightRadius:28}}
+      source={require('../Images/pic1.jpg')} style={{ width: 307,height: 275.9}}>
+      <Text style = {styles.day}>Day {this.props.day}</Text>
+  </ImageBackground>
+     <View style = {styles.sub_container}>
+       <Text style = {styles.title}>
+            {this.props.title}
+       </Text>
+       <Text style = {styles.subtitle}>
+            {this.props.subtitle}
+       </Text>
+       </View>
       </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
 
     )
   }
