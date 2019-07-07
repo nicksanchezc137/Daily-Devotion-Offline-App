@@ -1,4 +1,5 @@
-import { StackNavigator } from 'react-navigation'
+import { StackNavigator,DrawerNavigator } from 'react-navigation'
+import SideMenu from '../Containers/SideMenu'
 import GuideViewScreen from '../Containers/GuideViewScreen'
 import CommentsScreen from '../Containers/CommentsScreen'
 import SplashScreen from '../Containers/SplashScreen'
@@ -8,13 +9,26 @@ import LaunchScreen from '../Containers/LaunchScreen'
 
 import styles from './Styles/NavigationStyles'
 
+
+const Drawer = DrawerNavigator ({
+  
+  HomeScreen: { screen: HomeScreen },
+  GuideViewScreen: { screen: GuideViewScreen },
+  BookmarksScreen: { screen: BookmarksScreen },
+},
+{
+  contentComponent: SideMenu,
+  drawerWidth: 300
+}
+);
+
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   GuideViewScreen: { screen: GuideViewScreen },
   CommentsScreen: { screen: CommentsScreen },
   SplashScreen: { screen: SplashScreen },
   BookmarksScreen: { screen: BookmarksScreen },
-  HomeScreen: { screen: HomeScreen },
+  HomeScreen: { screen: Drawer },
   LaunchScreen: { screen: LaunchScreen }
 }, {
   // Default config for all screens

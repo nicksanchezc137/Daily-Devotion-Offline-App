@@ -6,6 +6,8 @@ export const ALL_DATA = [
 
         book:"Romans 12:1-8",
 
+        verse: "If my people would but listen to me, . . . how quickly would I subdue their enemies and turn my hand against their foes! ",
+
         subtitle:"True wisdom is gazing at God",
 
         insight:"It is vital that we know God’s love and rest comfortably in it. But a true understanding of God’s love begins with an overwhelming awareness of His greatness, holiness, and power as they contrast our own sinful nature. There is nothing more fear-inducing than that. But this is where we must begin. This will shape our self-awareness, our relationships, our work, our prayers—everything we think and do. It will make us wise",
@@ -19,7 +21,9 @@ export const ALL_DATA = [
 
         title:"Wise Worship ",
 
-        book:"Romans 12:1-8",
+        book:"Romans 12:1-2",
+
+        verse:"I urge you, brothers, in view of God’s mercy, to offer your  bodies as living sacrifices, holy and pleasing to God—this is your spiritual act of worship",
 
         subtitle:"True wisdom is gazing at God",
 

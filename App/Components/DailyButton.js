@@ -22,9 +22,9 @@ export default class DailyButton extends Component {
       >      
       <View style={styles.container}>
       <ImageBackground 
-      imageStyle={{borderTopLeftRadius: 28,
-         borderTopRightRadius:28}}
-      source={require('../Images/pic1.jpg')} style={{ width: 307,height: 275.9}}>
+      imageStyle={{borderTopLeftRadius: 5,
+         borderTopRightRadius:5}}
+      source={this.props.source} style={{ width: 307,height: 275.9}}>
       <Text style = {styles.day}>Day {this.props.day}</Text>
   </ImageBackground>
      <View style = {styles.sub_container}>

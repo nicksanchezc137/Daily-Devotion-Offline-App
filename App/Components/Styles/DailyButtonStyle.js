@@ -4,9 +4,9 @@ export default StyleSheet.create({
   container: {
     width: 307,
   height: 445,
-  borderRadius: 28,
+  borderRadius: 5,
   backgroundColor: "#fff",
-  elevation:3,
+  elevation:1,
   margin:20
   },
   day:{
@@ -18,7 +18,8 @@ export default StyleSheet.create({
     letterSpacing: 1.4,
     color: "#ffffff",
     marginTop:12,
-    marginLeft:12
+    marginLeft:12,
+    margin:15,
   },
   sub_container:{
    flexDirection:'column',

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
+import Header from '../Components/Header';
 
 // Styles
 import styles from './Styles/BookmarksScreenStyle'
@@ -10,11 +11,12 @@ import styles from './Styles/BookmarksScreenStyle'
 class BookmarksScreen extends Component {
   render () {
     return (
+      <View style={styles.container}>
+      <Header heading = {'Bookmarks'}/>
       <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text>BookmarksScreen</Text>
-        </KeyboardAvoidingView>
+
       </ScrollView>
+      </View>
     )
   }
 }

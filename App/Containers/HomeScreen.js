@@ -29,11 +29,17 @@ class HomeScreen extends Component {
         <DailyButton 
         title = {item.title}
         subtitle = {item.subtitle}
+        source = {require('../Images/pic2.jpg')}
         onPress = {()=>{
+          console.warn('the verse is '+ item.verse)
           this.props.navigation.navigate('GuideViewScreen',{
             title:item.title,
             day:item.day,
-            
+            book:item.book,
+            subtitle:item.subtitle,
+            content:item.content,
+            insight:item.insight,
+            verse:item.verse
           });
         }}
         day = {item.day}/>
