@@ -31,9 +31,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
       <Header heading = 'Home'/>
-       <Text>
-         hello
-       </Text>
+       
       </View>
     )
   }
