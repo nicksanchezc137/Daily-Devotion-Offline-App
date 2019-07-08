@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import styles from './Styles/HomeScreenStyle';
 import {ALL_DATA} from '../Services/Data';
 import DailyButton from '../Components/DailyButton';
-
+import Header from '../Components/Header';
 
 class HomeScreen extends Component {
   componentWillMount(){
@@ -23,15 +23,37 @@ class HomeScreen extends Component {
     }
   }
   renderDailyButton(){
-     ALL_DATA.map(()=>{
-
+   return  ALL_DATA.map((item)=>{
+      return(
+        <DailyButton 
+        title = {item.title}
+        subtitle = {item.subtitle}
+        source = {require('../Images/pic2.jpg')}
+        onPress = {()=>{
+          console.warn('the verse is '+ item.verse)
+          this.props.navigation.navigate('GuideViewScreen',{
+            title:item.title,
+            day:item.day,
+            book:item.book,
+            subtitle:item.subtitle,
+            content:item.content,
+            insight:item.insight,
+            verse:item.verse
+          });
+        }}
+        day = {item.day}/>
+      )
      }) 
   }
   render () {
     return (
       <View style={styles.container}>
       <Header heading = 'Home'/>
-       
+      <ScrollView style = {{alignSelf:'center',flex:1,flexDirection:'row'}} horizontal = {true}>
+        
+         {this.renderDailyButton()}
+        
+      </ScrollView>
       </View>
     )
   }
@@ -49,5 +71,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
-      import Header from '../Components/Header';
-
+     
