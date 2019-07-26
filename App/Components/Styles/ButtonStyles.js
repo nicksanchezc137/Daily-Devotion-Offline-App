@@ -2,12 +2,16 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    height: 58,
-    backgroundColor: "#fff",
-    justifyContent:'flex-start',
-    alignItems:'flex-start',
+    height: 48,
+    backgroundColor: "#43dae6",
+    justifyContent:'center',
+    alignItems:'center',
     elevation:3,
-    flexDirection:'row'
+    flexDirection:'row',
+    marginRight:21,
+    marginLeft:20,
+    marginTop:15,
+    borderRadius:3
   },
   title:{
   fontFamily: "OpenSans",
@@ -16,8 +20,7 @@ export default StyleSheet.create({
   fontStyle: "normal",
   letterSpacing: 1.4,
   textAlign: "center",
-  color: "#000",
-  marginLeft:21,
- marginTop:10,marginLeft:10
+  color: "#fff",
+
   }
 })

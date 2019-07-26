@@ -13,11 +13,11 @@ class BookmarksScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
-      <Header heading = {'Bookmarks'}/>
+      <Header navigation={this.props.navigation} heading = {'Bookmarks'}/>
       <ScrollView style={styles.container}>
 
       </ScrollView>
-       {/* <Fab name = 'bookmark'/> */}
+      
        
       </View>
     )

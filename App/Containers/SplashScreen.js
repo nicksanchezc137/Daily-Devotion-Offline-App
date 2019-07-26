@@ -6,22 +6,42 @@ import { connect } from 'react-redux'
 
 // Styles
 import styles from './Styles/SplashScreenStyle'
-
+import firebase from "../Services/Firebase";
 class SplashScreen extends Component {
   componentWillMount(){
-    this.goToHome();
+   this.checkIfLoggedIn()
   }
   render () {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Text>SplashScreen</Text>
+          <Text style = {{fontSize:26,color:'#343434', }}>Devotion</Text>
         </KeyboardAvoidingView>
       </ScrollView>
     )
   }
-  goToHome(){
-    this.props.navigation.navigate("HomeScreen");
+  goToHome(user){
+    if(user){
+      this.props.navigation.navigate("HomeScreen",{
+        isLoggedIn:true,
+        user:user
+      });
+    }else{
+      this.props.navigation.navigate("HomeScreen",{
+        isLoggedIn:false,
+      });
+    }
+    
+  }
+  checkIfLoggedIn(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log('user logged')
+        this.goToHome(user);
+      }else{
+        this.goToHome(null);
+      }
+   });
   }
 }
 

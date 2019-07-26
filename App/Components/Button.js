@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native'
-import styles from './Styles/HeaderStyle'
+import styles from './Styles/ButtonStyles'
 import { Icon } from "native-base";
 export default class Header extends Component {
   // // Prop type warnings
@@ -17,16 +17,14 @@ export default class Header extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+  
         <TouchableOpacity
-        style = {{marginTop:10,marginLeft:20}}
-         onPress = {()=>{this.props.navigation.goBack()}}
+        style = {styles.container}
+         onPress = {this.props.onPress}
         >
-        {this.props.hideBack?null: <Icon size = {19.5} color = '#343434' name = 'arrow-round-back' />}
-
+          <Text style = {styles.title}>{this.props.name}</Text>
          </TouchableOpacity>
-        <Text style = {styles.title}>{this.props.heading}</Text>
-      </View>
+        
     )
   }
 }

@@ -7,6 +7,7 @@ import Header from "../Components/Header";
 // Styles
 import styles from "./Styles/GuideViewScreenStyle";
 import Fab from '../Components/Fab';
+import Button from "../Components/Button";
 
 class GuideViewScreen extends Component {
 
@@ -73,7 +74,7 @@ class GuideViewScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header heading={this.params.title} />
+        <Header navigation = {this.props.navigation} heading={this.params.title} />
         <ScrollView style={styles.container}>
           <Text style={styles.subtitle}>{this.params.subtitle}</Text>
 
@@ -101,6 +102,15 @@ class GuideViewScreen extends Component {
           onPress={() => {
             this.checkIfBookmarkExists(this.params.day)
           }}
+        />
+        <Button
+          onPress={() => {
+           this.props.navigation.navigate("CommentsScreen",{
+            title:this.params.title,
+            day:this.params.day
+           })
+          }}
+          name="Comments"
         />
       </View>
     );

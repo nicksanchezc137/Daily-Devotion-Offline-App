@@ -1,24 +1,60 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+         buildToolsVersion = "27.0.3"
+        minSdkVersion = 16
+        compileSdkVersion = 28
+        targetSdkVersion = 23
+        supportLibVersion = "23.0.1"
+        googlePlayServicesAuthVersion = "15.0.1" // <--- use this version or newer
+    }
     repositories {
-        jcenter()
+        google()
+        jcenter() 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        // classpath 'com.android.tools.build:gradle:3.3.1'
+      classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.google.gms:google-services:4.0.1'
 
+        // classpath 'com.google.gms:google-services:4.0.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
 allprojects {
-    repositories {
+     repositories {
+        google()
+        mavenCentral() 
+        maven {url "https://maven.google.com"} // <--- this should be added and should be above jcenter
         mavenLocal()
-        jcenter()
+      
         maven {
+            url "https://maven.google.com"
+            }
+        
+       
+            maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
+        }
+        repositories {
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+    }
+      jcenter()
+        
+
+    }
+}
+subprojects {project ->
+    if (project.name.contains('module name, e.g. react-native-image-picker')) {
+            buildscript {
+                repositories {
+                maven { url "https://dl.bintray.com/android/android-tools/"  }
+            }    
         }
     }
 }

@@ -78,6 +78,26 @@ class SideMenu extends Component {
           Bookmarks
          </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity
+             onPress = {()=>{
+                 this.props.navigation.navigate('LoginScreen')
+             }}
+            >
+            <Text style = {{
+             fontFamily: "OpenSans",
+             fontSize: 20,
+             marginTop:21,
+             fontWeight: "600",
+             fontStyle: "normal",
+             lineHeight: 22,
+             letterSpacing: 0,
+             textAlign: "center",
+             color: "#777"
+         }}>
+          Login
+         </Text>
+            </TouchableOpacity>
          
         
          

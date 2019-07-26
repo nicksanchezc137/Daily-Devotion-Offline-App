@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "535613739282",
+    "firebase_url": "https://dailydevotionoffline-f0662.firebaseio.com",
+    "project_id": "dailydevotionoffline-f0662",
+    "storage_bucket": "dailydevotionoffline-f0662.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535613739282:android:92922fa9c4346457",
+        "android_client_info":{
+          "package_name": "com.dailydevotionoffline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535613739282-336eltvk0ojqjr1e8k7qfbqsuic7pe2q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dailydevotionoffline",
+            "certificate_hash": "b8ef1af1efea25df1566b5d1c9a209daafcbf997"
+          }
+        },
+        {
+          "client_id": "535613739282-a73b29vh0v8m66upbhut8mp35v3aqhdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClovtPkJ2dTh5BdKPA1x7tNe3pS4qH-vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535613739282-a73b29vh0v8m66upbhut8mp35v3aqhdl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

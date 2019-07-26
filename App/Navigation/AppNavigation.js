@@ -6,6 +6,7 @@ import SplashScreen from '../Containers/SplashScreen'
 import BookmarksScreen from '../Containers/BookmarksScreen'
 import HomeScreen from '../Containers/HomeScreen'
 import LaunchScreen from '../Containers/LaunchScreen'
+import LoginScreen from '../Containers/LoginScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -29,7 +30,8 @@ const PrimaryNav = StackNavigator({
   SplashScreen: { screen: SplashScreen },
   BookmarksScreen: { screen: BookmarksScreen },
   HomeScreen: { screen: Drawer },
-  LaunchScreen: { screen: LaunchScreen }
+  LaunchScreen: { screen: LaunchScreen },
+  LoginScreen:{screen:LoginScreen}
 }, {
   // Default config for all screens
   headerMode: 'none',
