@@ -19,7 +19,7 @@ export default class Header extends Component {
     return (
   
         <TouchableOpacity
-        style = {styles.container}
+        style = {[styles.container,this.props.style]}
          onPress = {this.props.onPress}
         >
           <Text style = {styles.title}>{this.props.name}</Text>

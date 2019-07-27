@@ -19,7 +19,7 @@ class SideMenu extends Component {
     return (
       <View>
         <View style = {{
-            backgroundColor:'#43dae6',
+            backgroundColor:'#5D4037',
             height:200,
             justifyContent:'center'
         }}>
@@ -75,7 +75,7 @@ class SideMenu extends Component {
              textAlign: "center",
              color: "#777"
          }}>
-          Bookmarks
+          Favorite
          </Text>
             </TouchableOpacity>
 

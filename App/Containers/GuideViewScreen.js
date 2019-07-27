@@ -8,6 +8,8 @@ import Header from "../Components/Header";
 import styles from "./Styles/GuideViewScreenStyle";
 import Fab from '../Components/Fab';
 import Button from "../Components/Button";
+import firebase from "../Services/Firebase";
+
 
 class GuideViewScreen extends Component {
 
@@ -19,58 +21,38 @@ class GuideViewScreen extends Component {
     }
   }
   componentWillMount(){
-  this.getBookmark();
-  }
-  saveBookmark(day){
-    let bookmarks = []
-   bookmarks = this.state.bookmarks_array.push(day);
-   let data = {
-      bookmark_array:bookmarks
-   }
-
-   console.warn("the data saved is "+ data)
-    try{
-      AsyncStorage.setItem('BOOKMARKS',JSON.stringify(data));
-    }catch(error){
-
-    }
-  }
-  checkIfBookmarkExists(day){
-    console.warn("checking "+ day)
-    if(this.state.bookmarks_array.length == 0){
-      this.saveBookmark(day);
-    }else{
-      console.warn('looping thru ',this.state.bookmarks_array.length)
-
-      for(let i = 0; i <= this.state.bookmarks_array.length; i ++){
-        console.warn('has entered loop')
-        if(day == this.state.bookmarks_array[i]){
-          //the bookmark already exists
-          alert("This is already bookmarked");
-          // return;
-        }else{
-          this.saveBookmark(day);
-          // return;
-        }
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log("the user is " + JSON.stringify(user));
+        this.setState({
+          userId: user.uid,
+        });
+      } else {
+        //alert("Please login to access your bookmarks")
       }
-    }
-    
+    });
   }
- async  getBookmark(){
-    try{
-    let bookmarks = await  AsyncStorage.getItem('BOOKMARKS' );
-    if(bookmarks){
-
-      let bookmark_obj = JSON.parse(bookmarks);
-      this.setState({bookmarks_array: bookmark_obj.bookmark_array});
-      console.warn('the bookmark array is '+ (bookmarks))
-    }else{
-      console.warn('no data')
-    }
-    }catch(error){
-
+  
+  addFavorite(data) {
+    console.log("the data is " + JSON.stringify(data));
+  
+    if (this.state.userId) {
+      firebase
+        .firestore()
+        .collection("favorites")
+        .doc()
+        .set(data)
+        .then(doc => {
+          alert("Added to Favorites");
+        })
+        .catch(function(error) {
+          console.warn("Error getting document:", error);
+        });
+    } else {
+      alert("You need to be logged in");
     }
   }
+
   render() {
     return (
       <View style={styles.container}>
@@ -82,8 +64,7 @@ class GuideViewScreen extends Component {
             style={{
               borderRadius: 5,
               backgroundColor: "#fff",
-              elevation: 1,
-              margin: 20
+              marginTop: 20
             }}
           >
             <Text style={styles.verse}>{this.params.book}</Text>
@@ -91,6 +72,19 @@ class GuideViewScreen extends Component {
           </View>
 
           <Text style={styles.content}>{this.params.content}</Text>
+          <Button
+          style = {{
+            marginTop:20,
+            marginBottom: 100,
+          }}
+          onPress={() => {
+           this.props.navigation.navigate("CommentsScreen",{
+            title:this.params.title,
+            day:this.params.day
+           })
+          }}
+          name="Comments"
+        />
         </ScrollView>
         <Fab
           style={{
@@ -100,18 +94,14 @@ class GuideViewScreen extends Component {
             bottom:0
           }}
           onPress={() => {
-            this.checkIfBookmarkExists(this.params.day)
+            this.addFavorite({
+              userId:this.state.userId,
+              day:this.params.day,
+              title:this.params.title,
+            })
           }}
         />
-        <Button
-          onPress={() => {
-           this.props.navigation.navigate("CommentsScreen",{
-            title:this.params.title,
-            day:this.params.day
-           })
-          }}
-          name="Comments"
-        />
+        
       </View>
     );
   }

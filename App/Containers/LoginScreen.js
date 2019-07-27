@@ -36,7 +36,9 @@ export default class LoginScreen extends Component {
         .then(user => {
           // let user = firebase.auth().currentUser;
           console.log("the user is " + user);
-          this.props.navigation.navigate("HomeScreen")
+          this.props.navigation.navigate("HomeScreen",{
+            isLoggedIn:true
+          })
         })
         .catch(error => {
           // Handle Errors here.

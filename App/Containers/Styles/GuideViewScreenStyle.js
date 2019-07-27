@@ -31,13 +31,13 @@ export default StyleSheet.create({
   },
   verse:{
     fontFamily: "OpenSans",
-    fontSize: 14,
-    fontWeight: "normal",
+    fontSize: 16,
+    fontWeight: "200",
     fontStyle: "normal",
     lineHeight: 19,
     letterSpacing: 0,
     textAlign: "left",
-    color: "#4d4d4d" ,
+    color: "#343434" ,
     marginLeft:21
   }
 })

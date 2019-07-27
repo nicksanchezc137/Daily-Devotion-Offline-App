@@ -36,7 +36,7 @@ class HomeScreen extends Component {
           title={item.title}
           key={index}
           subtitle={item.subtitle}
-          source={require("../Images/pic2.jpg")}
+          source={require("../Images/art1.jpg")}
           onPress={() => {
             console.warn("the verse is " + item.verse);
             this.props.navigation.navigate("GuideViewScreen", {
