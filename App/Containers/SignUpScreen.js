@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { TouchableOpacity, Text, Image, View } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Images } from "../Themes";
 import Header from "../Components/Header";
 import Input from "../Components/Input";
 import firebase from "../Services/Firebase";
 import Button from "../Components/Button";
 
-export default class LoginScreen extends Component {
+export default class SignUpScreen extends Component {
   state = {
     email: "",
     password: "",
@@ -23,14 +23,16 @@ export default class LoginScreen extends Component {
   onPasswordChange = password => {
     this.setState({ password: password });
   };
- 
+  onConfirmPasswordChange = confirmPassword => {
+    this.setState({ confirmPassword: confirmPassword });
+  };
 
-  signInWithEmail(email, password) {
+  signupWithEmailAndPassword(email, password, confirmPassword) {
     console.log("the email and passwords are ", email.trim(), password.trim());
-    if (email.trim() && password.trim()) {
+    if (email.trim() && password.trim() === confirmPassword.trim()) {
       firebase
         .auth()
-        .signInWithEmailAndPassword(email.trim(), password.trim())
+        .createUserWithEmailAndPassword(email.trim(), password.trim())
         .then(user => {
           // let user = firebase.auth().currentUser;
           console.log("the user is " + user);
@@ -45,13 +47,13 @@ export default class LoginScreen extends Component {
           alert(errorMessage);
         });
     } else {
-      alert("Invalid email or passwords");
+      alert("Invalid email or passwords do not match");
     }
   }
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "#fff" }}>
-        <Header navigation={this.props.navigation} heading={"Login"} />
+        <Header navigation={this.props.navigation} heading={"Sign Up"} />
 
         <Input onChangeText={this.onEmailChange} placeholder="Email" />
 
@@ -61,21 +63,29 @@ export default class LoginScreen extends Component {
           placeholder="Password"
         />
 
+        <Input
+          secure={true}
+          onChangeText={this.onConfirmPasswordChange}
+          placeholder="Confirm Password"
+        />
+
         <Button
           onPress={() => {
-            this.signInWithEmail(
+            this.signupWithEmailAndPassword(
               this.state.email,
-              this.state.password
+              this.state.password,
+              this.state.confirmPassword
             );
           }}
-          name="Login"
+          name="Signup"
         />
+
         <TouchableOpacity
-          style={{
-            marginTop: 30
-          }}
+         style = {{
+           marginTop:30
+         }}
           onPress={() => {
-            this.props.navigation.navigate("SignUpScreen");
+            this.props.navigation.navigate("LoginScreen");
           }}
         >
           <Text
@@ -89,7 +99,7 @@ export default class LoginScreen extends Component {
               color: "#000"
             }}
           >
-            Sign up here
+            Login here
           </Text>
         </TouchableOpacity>
       </View>

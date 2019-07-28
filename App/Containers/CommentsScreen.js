@@ -23,12 +23,31 @@ class CommentsScreen extends Component {
     };
     this.params = this.props.navigation.state.params;
   }
-  vote(vote, doc_id) {
+  vote(vote, doc_id, vote_value) {
     firebase
       .firestore()
       .collection("comments")
       .doc(doc_id)
       .update({ vote: vote });
+       this.saveVote({
+         userId:this.state.userId,
+         vote:vote_value,
+         commentId:doc_id
+       })
+      
+  }
+  saveVote(data){
+    firebase
+        .firestore()
+        .collection("votes")
+        .doc()
+        .set(data)
+        .then(doc => {
+         
+        })
+        .catch(function(error) {
+          console.warn("Error getting document:", error);
+        });
   }
   componentWillMount() {
     this.fetchItems();
@@ -78,7 +97,7 @@ class CommentsScreen extends Component {
           vote={comment.vote}
           comment={comment.comment}
           onUpVote={() => {
-            this.vote(comment.vote + 1, comment_id_array[index], index, 1);
+            this.vote(comment.vote + 1, comment_id_array[index], 1);
             let new_array = Object.assign([], comments_array, {
               [index]: {
                 email: comment.email,
@@ -91,7 +110,7 @@ class CommentsScreen extends Component {
             this.setState({ comments_array: new_array });
           }}
           onDownVote={() => {
-            this.vote(comment.vote - 1, comment_id_array[index], index);
+            this.vote(comment.vote - 1, comment_id_array[index], -1);
             let new_array = Object.assign([], comments_array, {
               [index]: {
                 email: comment.email,

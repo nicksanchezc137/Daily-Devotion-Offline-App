@@ -2,16 +2,27 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScrollView, Text, View, TouchableOpacity, Image, Button, Platform, AsyncStorage} from 'react-native';
-
-
-
-
+import firebase from "../Services/Firebase";
 class SideMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fuid:""
+      fuid:"",
+      isLoggedIn:false
     }
+  }
+
+  componentWillMount(){
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log("the user is " + JSON.stringify(user));
+        this.setState({
+          isLoggedIn : true,
+        });
+      } else {
+        //alert("Please login to access your bookmarks")
+      }
+    });
   }
   
 
@@ -79,6 +90,7 @@ class SideMenu extends Component {
          </Text>
             </TouchableOpacity>
 
+           {!this.state.isLoggedIn?
             <TouchableOpacity
              onPress = {()=>{
                  this.props.navigation.navigate('LoginScreen')
@@ -97,7 +109,31 @@ class SideMenu extends Component {
          }}>
           Login
          </Text>
-            </TouchableOpacity>
+            </TouchableOpacity>: 
+            <TouchableOpacity
+             onPress = {()=>{
+              firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+                alert("Logged Out")
+              }).catch(function(error) {
+                // An error happened.
+              }); 
+             }}
+            >
+            <Text style = {{
+             fontFamily: "OpenSans",
+             fontSize: 20,
+             marginTop:21,
+             fontWeight: "600",
+             fontStyle: "normal",
+             lineHeight: 22,
+             letterSpacing: 0,
+             textAlign: "center",
+             color: "#777"
+         }}>
+          Logout
+         </Text>
+            </TouchableOpacity>}
          
         
          
