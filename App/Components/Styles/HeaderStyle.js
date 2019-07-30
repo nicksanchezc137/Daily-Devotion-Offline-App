@@ -17,7 +17,7 @@ export default StyleSheet.create({
   letterSpacing: 1.4,
   textAlign: "center",
   color: "#000",
-  marginLeft:21,
- marginTop:10,marginLeft:10
+  marginLeft:41,
+ marginTop:7,
   }
 })

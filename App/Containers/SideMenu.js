@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScrollView, Text, View, TouchableOpacity, Image, Button, Platform, AsyncStorage} from 'react-native';
+import {Icon} from 'native-base';
 import firebase from "../Services/Firebase";
 class SideMenu extends Component {
   constructor(props) {
@@ -50,10 +51,14 @@ class SideMenu extends Component {
         <ScrollView>
 
             <TouchableOpacity
+              style = {{
+                alignItems:'center', justifyContent:'center', flexDirection:'row'
+              }}
              onPress = {()=>{
                  this.props.navigation.navigate('HomeScreen')
              }}
             >
+
             <Text style = {{
              fontFamily: "OpenSans",
              fontSize: 20,
@@ -74,7 +79,12 @@ class SideMenu extends Component {
              onPress = {()=>{
                  this.props.navigation.navigate('BookmarksScreen')
              }}
+
+             style = {{
+              alignItems:'center', justifyContent:'center', flexDirection:'row'
+            }}
             >
+               
             <Text style = {{
              fontFamily: "OpenSans",
              fontSize: 20,
@@ -95,7 +105,12 @@ class SideMenu extends Component {
              onPress = {()=>{
                  this.props.navigation.navigate('LoginScreen')
              }}
+
+             style = {{
+              alignItems:'center', justifyContent:'center', flexDirection:'row'
+            }}
             >
+              
             <Text style = {{
              fontFamily: "OpenSans",
              fontSize: 20,
@@ -111,6 +126,9 @@ class SideMenu extends Component {
          </Text>
             </TouchableOpacity>: 
             <TouchableOpacity
+            style = {{
+              alignItems:'center', justifyContent:'center', flexDirection:'row'
+            }}
              onPress = {()=>{
               firebase.auth().signOut().then(function() {
                 // Sign-out successful.
@@ -120,6 +138,7 @@ class SideMenu extends Component {
               }); 
              }}
             >
+               
             <Text style = {{
              fontFamily: "OpenSans",
              fontSize: 20,

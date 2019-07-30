@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, View, Text, AsyncStorage } from "react-native";
+import { ScrollView, View, Text, StatusBar } from "react-native";
 import { connect } from "react-redux";
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -9,7 +9,7 @@ import styles from "./Styles/GuideViewScreenStyle";
 import Fab from '../Components/Fab';
 import Button from "../Components/Button";
 import firebase from "../Services/Firebase";
-
+import { ALL_DATA } from "../Services/Data";
 
 class GuideViewScreen extends Component {
 
@@ -21,6 +21,8 @@ class GuideViewScreen extends Component {
     }
   }
   componentWillMount(){
+    StatusBar.setBarStyle( 'light-content',true)
+    StatusBar.setBackgroundColor("#fff")
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log("the user is " + JSON.stringify(user));
@@ -31,6 +33,10 @@ class GuideViewScreen extends Component {
         //alert("Please login to access your bookmarks")
       }
     });
+  }
+  componentWillUnmount(){
+    StatusBar.setBarStyle( 'light-content',true)
+    StatusBar.setBackgroundColor("#000")
   }
   
   addFavorite(data) {
@@ -46,7 +52,7 @@ class GuideViewScreen extends Component {
           alert("Added to Favorites");
         })
         .catch(function(error) {
-          console.warn("Error getting document:", error);
+          console.log("Error getting document:", error);
         });
     } else {
       alert("You need to be logged in");
@@ -54,9 +60,24 @@ class GuideViewScreen extends Component {
   }
 
   render() {
+    const {day} = this.params
     return (
       <View style={styles.container}>
-        <Header navigation = {this.props.navigation} heading={this.params.title} />
+        <Header navigation = {this.props.navigation} 
+        heading={this.params.title} 
+        showFront = {true}
+          onNextPress = {()=>{
+            this.props.navigation.push("GuideViewScreen",{
+              title: ALL_DATA[day].title,
+              day: ALL_DATA[day].day,
+              book: ALL_DATA[day].book,
+              subtitle: ALL_DATA[day].subtitle,
+              content: ALL_DATA[day].content,
+              insight: ALL_DATA[day].insight,
+              verse: ALL_DATA[day].verse
+            })
+          }}
+        />
         <ScrollView style={styles.container}>
           <Text style={styles.subtitle}>{this.params.subtitle}</Text>
 

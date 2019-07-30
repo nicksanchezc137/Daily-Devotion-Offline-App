@@ -44,7 +44,7 @@ class BookmarksScreen extends Component {
       return(
         <TouchableOpacity 
         onPress = {()=>{
-          console.warn('the position is '+favorite.day-1 )
+          console.log('the position is '+favorite.day-1 )
           this.props.navigation.navigate("GuideViewScreen", {
             title: ALL_DATA[favorite.day-1].title,
             day: favorite.day,
@@ -80,7 +80,7 @@ class BookmarksScreen extends Component {
             favorites_array: [...this.state.favorites_array, doc.data()]
           });
         });
-        console.warn(JSON.stringify(data))
+        console.log(JSON.stringify(data))
       });
   }
 }

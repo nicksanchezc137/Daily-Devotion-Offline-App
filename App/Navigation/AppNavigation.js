@@ -8,7 +8,6 @@ import HomeScreen from '../Containers/HomeScreen'
 import LaunchScreen from '../Containers/LaunchScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import SignUpScreen from "../Containers/SignUpScreen"
-
 import styles from './Styles/NavigationStyles'
 
 

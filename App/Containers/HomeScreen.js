@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, View, Text, KeyboardAvoidingView } from "react-native";
+import { ScrollView, View, Text, StatusBar } from "react-native";
 import { connect } from "react-redux";
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -12,7 +12,9 @@ import Header from "../Components/Header";
 
 class HomeScreen extends Component {
   componentWillMount() {
-    console.warn("The data is " + JSON.stringify(ALL_DATA));
+    console.log("The data is " + JSON.stringify(ALL_DATA));
+    StatusBar.setBarStyle( 'light-content',true)
+    StatusBar.setBackgroundColor("#000")
   }
 
   constructor(props) {
@@ -21,7 +23,7 @@ class HomeScreen extends Component {
     this.state = {
       isLoggedIn:this.params.isLoggedIn,
       user:{}
-    };
+    }
     if(this.params.isLoggedIn){
       this.setState({
         user:this.params.user
@@ -38,7 +40,7 @@ class HomeScreen extends Component {
           subtitle={item.subtitle}
           source={require("../Images/art1.jpg")}
           onPress={() => {
-            console.warn("the verse is " + item.verse);
+            console.log("the verse is " + item.verse);
             this.props.navigation.navigate("GuideViewScreen", {
               title: item.title,
               day: item.day,
@@ -59,10 +61,12 @@ class HomeScreen extends Component {
       <View style={styles.container}>
         <Header hideBack = {true} heading="Home" />
         <ScrollView
-          style={{ alignSelf: "center", flex: 1, flexDirection: "row" }}
-          horizontal={true}
-        >
+          style={{ alignSelf: "center", flexDirection: "row" }}
+          horizontal={true}>
           {this.renderDailyButton()}
+        </ScrollView>
+        <ScrollView
+          horizontal={true}>
         </ScrollView>
       </View>
     );
