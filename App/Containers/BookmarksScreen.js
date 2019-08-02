@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, TouchableOpacity,Text, View } from "react-native";
+import { ScrollView, TouchableOpacity, Text, View } from "react-native";
 import { connect } from "react-redux";
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -12,11 +12,17 @@ class BookmarksScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     favorites_array:[],
-     favorites_id_array:[],
+      favorites_array: [],
+      favorites_id_array: [],
       userId: ""
     };
   }
+  componentWillMount() {
+   // console.log("The data is " + JSON.stringify(ALL_DATA));
+    StatusBar.setBarStyle( 'dark-content',true);
+    StatusBar.setBackgroundColor("#fff");
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -28,38 +34,57 @@ class BookmarksScreen extends Component {
     );
   }
   componentWillMount() {
-    
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log("the user is " + JSON.stringify(user));
         this.setState({
-          userId: user.uid,
+          userId: user.uid
         });
-        this.fetchItems(user.uid)
-      } 
+        this.fetchItems(user.uid);
+      }
     });
   }
-  renderFavorites(){
-  return  this.state.favorites_array.map((favorite,index)=>{
-      return(
-        <TouchableOpacity 
-        onPress = {()=>{
-          console.log('the position is '+favorite.day-1 )
-          this.props.navigation.navigate("GuideViewScreen", {
-            title: ALL_DATA[favorite.day-1].title,
-            day: favorite.day,
-            book: ALL_DATA[favorite.day-1].book,
-            subtitle: ALL_DATA[favorite.day-1].subtitle,
-            content: ALL_DATA[favorite.day-1].content,
-            insight: ALL_DATA[favorite.day-1].insight,
-            verse: ALL_DATA[favorite.day-1].verse
-          });
-        }}
-        key = {index} style = {styles.fav_container}>
-          <Text style = {styles.text}>{favorite.title}</Text>
+  renderFavorites() {
+    return this.state.favorites_array.map((favorite, index) => {
+      return (
+        <TouchableOpacity
+         
+          onPress={() => {
+            console.log("the position is " + favorite.day - 1);
+            this.props.navigation.navigate("GuideViewScreen", {
+              title: ALL_DATA[favorite.day - 1].title,
+              day: favorite.day,
+              book: ALL_DATA[favorite.day - 1].book,
+              subtitle: ALL_DATA[favorite.day - 1].subtitle,
+              content: ALL_DATA[favorite.day - 1].content,
+              insight: ALL_DATA[favorite.day - 1].insight,
+              verse: ALL_DATA[favorite.day - 1].verse
+            });
+          }}
+          key={index}
+          style={styles.fav_container}
+        >
+          <View
+             style={{
+              width: 307,
+              height: 45,
+              borderRadius: 5,
+              backgroundColor: "#fff",
+              margin: 20,
+              borderColor: "#ddd",
+              borderWidth: 1,
+              alignItems:'center',
+              justifyContent:'center',
+              flexDirection:'row'
+            }}
+          >
+           <Text style={[styles.text,{ fontWeight: "500",}]}> Day {favorite.day}</Text>
+           <Text style={styles.text}>{favorite.title}</Text>
+          </View>
+         
         </TouchableOpacity>
-      )
-    })
+      );
+    });
   }
 
   fetchItems(userId) {
@@ -80,7 +105,7 @@ class BookmarksScreen extends Component {
             favorites_array: [...this.state.favorites_array, doc.data()]
           });
         });
-        console.log(JSON.stringify(data))
+        console.log(JSON.stringify(data));
       });
   }
 }

@@ -30,8 +30,6 @@ class CommentsScreen extends Component {
   }
 
   componentWillMount() {
-    StatusBar.setBarStyle( 'light-content',true)
-    StatusBar.setBackgroundColor("#000")
     this.fetchItems();
     this.getCommentsCount();
     firebase.auth().onAuthStateChanged(user => {
@@ -46,8 +44,7 @@ class CommentsScreen extends Component {
     });
   }
   componentWillUnmount(){
-    StatusBar.setBarStyle( 'light-content',true)
-    StatusBar.setBackgroundColor("#fff")
+   
   }
   onCommentChange = comment => {
     this.setState({ comment: comment });

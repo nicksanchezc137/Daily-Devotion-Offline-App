@@ -27,12 +27,11 @@ export default class Insight extends Component {
                 secureTextEntry={this.props.secure}
                 style={{
                   width: this.props.width?this.props.width: 260,
-                  fontSize: 14,
+                  fontSize: 18,
                   height: 33,
                   padding: 0,
                   color: "#000",
-                  marginLeft:-30
-                  
+                  marginLeft:-30  
                 }}
                 keyboardType = {this.props.inputType}
                 onChangeText={this.props.onChangeText}

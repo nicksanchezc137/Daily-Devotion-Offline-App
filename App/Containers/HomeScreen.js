@@ -13,8 +13,8 @@ import Header from "../Components/Header";
 class HomeScreen extends Component {
   componentWillMount() {
     console.log("The data is " + JSON.stringify(ALL_DATA));
-    StatusBar.setBarStyle( 'light-content',true)
-    StatusBar.setBackgroundColor("#000")
+    StatusBar.setBarStyle( 'dark-content',true)
+    StatusBar.setBackgroundColor("#fff")
   }
 
   constructor(props) {

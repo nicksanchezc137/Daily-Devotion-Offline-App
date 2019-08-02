@@ -21,24 +21,37 @@ class GuideViewScreen extends Component {
     }
   }
   componentWillMount(){
-    StatusBar.setBarStyle( 'light-content',true)
-    StatusBar.setBackgroundColor("#fff")
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log("the user is " + JSON.stringify(user));
         this.setState({
           userId: user.uid,
         });
+        this.fetchItems(user.userId)
       } else {
         //alert("Please login to access your bookmarks")
       }
     });
   }
-  componentWillUnmount(){
-    StatusBar.setBarStyle( 'light-content',true)
-    StatusBar.setBackgroundColor("#000")
-  }
-  
+  checkFav(data) {
+    firebase
+      .firestore()
+      .collection("favorites")
+      .where("userId", "==", this.state.userId)
+      .get()
+      .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+         if(doc.data().day == this.params.day){
+           //has already favorited
+
+         }else{
+           //can favorite
+           this.addFavorite(data)
+         }
+        });
+      
+      });
+}
   addFavorite(data) {
     console.log("the data is " + JSON.stringify(data));
   
@@ -115,7 +128,7 @@ class GuideViewScreen extends Component {
             bottom:0
           }}
           onPress={() => {
-            this.addFavorite({
+            this.checkFav({
               userId:this.state.userId,
               day:this.params.day,
               title:this.params.title,
