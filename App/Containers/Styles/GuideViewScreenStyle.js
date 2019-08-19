@@ -32,7 +32,7 @@ export default StyleSheet.create({
   verse:{
     fontFamily: "OpenSans",
     fontSize: 16,
-    fontWeight: "200",
+    fontWeight: "600",
     fontStyle: "normal",
     lineHeight: 19,
     letterSpacing: 0,

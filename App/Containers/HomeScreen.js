@@ -33,19 +33,19 @@ class HomeScreen extends Component {
   }
   renderDailyButton() {
     return ALL_DATA.map((item, index) => {
+     
       return (
         <DailyButton
           title={item.title}
           key={index}
-          subtitle={item.subtitle}
-          source={require("../Images/art1.jpg")}
+          subtitle={item.book}
+          source={item.image_source}
           onPress={() => {
             console.log("the verse is " + item.verse);
             this.props.navigation.navigate("GuideViewScreen", {
               title: item.title,
               day: item.day,
               book: item.book,
-              subtitle: item.subtitle,
               content: item.content,
               insight: item.insight,
               verse: item.verse

@@ -92,7 +92,7 @@ class GuideViewScreen extends Component {
           }}
         />
         <ScrollView style={styles.container}>
-          <Text style={styles.subtitle}>{this.params.subtitle}</Text>
+          <Text style={styles.subtitle}>{this.params.book}</Text>
 
           <View
             style={{
@@ -101,11 +101,13 @@ class GuideViewScreen extends Component {
               marginTop: 20
             }}
           >
-            <Text style={styles.verse}>{this.params.book}</Text>
             <Text style={styles.verse}>{this.params.verse}</Text>
           </View>
 
           <Text style={styles.content}>{this.params.content}</Text>
+
+          <Text style={[styles.content,{ fontWeight: "600",}]}>INSIGHT</Text>
+          <Text style={[styles.content,{ fontWeight: "400",}]}>{this.params.insight}</Text>
           <Button
           style = {{
             marginTop:20,
