@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, View, KeyboardAvoidingView, Image } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -13,10 +13,13 @@ class SplashScreen extends Component {
   }
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-          <Text style = {{fontSize:26,color:'#343434', }}>Devotion</Text>
-        </KeyboardAvoidingView>
+      <ScrollView>
+        <View  style={styles.container}>
+          <Image 
+            style = {styles.logo}
+           source = {require('../Images/logo.png')}
+          />
+        </View>
       </ScrollView>
     )
   }

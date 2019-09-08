@@ -2,16 +2,15 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    height: 48,
-    backgroundColor: "#5D4037",
+    height: 43,
+    borderRadius: 5,
+    backgroundColor: "#ff255a",
     justifyContent:'center',
     alignItems:'center',
-    elevation:3,
     flexDirection:'row',
     marginRight:21,
     marginLeft:20,
     marginTop:15,
-    borderRadius:3
   },
   title:{
   fontFamily: "OpenSans",

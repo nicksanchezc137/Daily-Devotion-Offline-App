@@ -86,7 +86,7 @@ class CommentsScreen extends Component {
           this.setState({
             comments_array: [...this.state.comments_array, doc.data()]
           });
-        });
+        });7
         console.log("the data is  " + data);
         let last_item = snapshot.docs[snapshot.docs.length - 1];
         console.log("the last id is " + last_item.data().id);

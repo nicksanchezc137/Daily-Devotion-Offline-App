@@ -11,6 +11,8 @@ const metrics = {
   doubleBaseMargin: 20,
   smallMargin: 5,
   doubleSection: 50,
+  deviceHeight:height,
+  deviceWidth:width,
   horizontalLineHeight: 1,
   screenWidth: width < height ? width : height,
   screenHeight: width < height ? height : width,

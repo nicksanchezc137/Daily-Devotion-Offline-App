@@ -51,17 +51,30 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "#fff" }}>
-        <Header navigation={this.props.navigation} heading={"Login"} />
+        {/* <Header navigation={this.props.navigation} heading={"Login"} /> */}
+        <View>
+           <Text style = {{fontFamily: "OpenSans",
+  fontSize: 18,
+  fontWeight: "bold",
+  fontStyle: "normal",
+  letterSpacing: 0,
+  color: "#000000",
+  alignSelf:'center',
+  marginTop:49
+  }}>Sign in</Text>
+         </View>
 
-        <Input onChangeText={this.onEmailChange} placeholder="Email" />
+        <Input style = {{marginTop:78}} onChangeText={this.onEmailChange} placeholder="Email" />
 
         <Input
+          style = {{marginTop:49.5}}
           secure={true}
           onChangeText={this.onPasswordChange}
           placeholder="Password"
         />
 
         <Button
+        style = {{marginTop:30.5}}
           onPress={() => {
             this.signInWithEmail(
               this.state.email,
@@ -70,10 +83,38 @@ export default class LoginScreen extends Component {
           }}
           name="Login"
         />
+
+
         <TouchableOpacity
           style={{
-            marginTop: 30
+            marginTop: 30,
+            alignSelf:'center'
           }}
+          onPress={() => {
+            
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: "OpenSans",
+              fontSize: 18,
+              fontWeight: "normal",
+              fontStyle: "normal",
+              letterSpacing: 0,
+              color: "#000000"
+            }}
+          >
+            Forgot password
+          </Text>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity
+         style = {{
+          position:'absolute',
+          bottom:0,
+          alignSelf:'center'
+         }}
           onPress={() => {
             this.props.navigation.navigate("SignUpScreen");
           }}
@@ -81,15 +122,15 @@ export default class LoginScreen extends Component {
           <Text
             style={{
               fontFamily: "OpenSans",
-              fontSize: 18,
-              fontWeight: "500",
-              fontStyle: "normal",
-              letterSpacing: 1.4,
-              textAlign: "center",
-              color: "#000"
+  fontSize: 18,
+  fontWeight: "normal",
+  fontStyle: "normal",
+  letterSpacing: 0,
+  color: "#000000",
+ 
             }}
           >
-            Sign up here
+           Don’t have an account? Sign up
           </Text>
         </TouchableOpacity>
       </View>

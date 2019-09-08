@@ -10,7 +10,8 @@ import Fab from '../Components/Fab';
 import Button from "../Components/Button";
 import firebase from "../Services/Firebase";
 import { ALL_DATA } from "../Services/Data";
-
+import { Colors } from "../Themes";
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 class GuideViewScreen extends Component {
 
   constructor(props) {
@@ -21,6 +22,8 @@ class GuideViewScreen extends Component {
     }
   }
   componentWillMount(){
+    StatusBar.setBarStyle( 'dark-content',true)
+    StatusBar.setBackgroundColor(Colors.white)
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log("the user is " + JSON.stringify(user));
@@ -32,6 +35,10 @@ class GuideViewScreen extends Component {
         //alert("Please login to access your bookmarks")
       }
     });
+  }
+  componentWillUnmount(){
+    StatusBar.setBarStyle( 'light-content',true)
+    StatusBar.setBackgroundColor(Colors.background)
   }
   checkFav(data) {
     firebase
@@ -72,23 +79,50 @@ class GuideViewScreen extends Component {
     }
   }
 
-  render() {
+  onSwipeLeft(gestureState) {
+   this.goToNextPage()
+  }
+ 
+  onSwipeRight(gestureState) {
+    this.props.navigation.goBack();
+  }
+ 
+  onSwipe(gestureName, gestureState) {
+ 
+  }
+
+  goToNextPage (){
     const {day} = this.params
+    this.props.navigation.push("GuideViewScreen",{
+      title: ALL_DATA[day].title,
+      day: ALL_DATA[day].day,
+      book: ALL_DATA[day].book,
+      subtitle: ALL_DATA[day].subtitle,
+      content: ALL_DATA[day].content,
+      insight: ALL_DATA[day].insight,
+      verse: ALL_DATA[day].verse
+    })
+  }
+
+  render() {
+  
+    const config = {
+      velocityThreshold: 0.3,
+      directionalOffsetThreshold: 80
+    };
     return (
-      <View style={styles.container}>
+      <GestureRecognizer
+        onSwipe={(direction, state) => this.onSwipe(direction, state)}
+        onSwipeLeft={(state) => this.onSwipeLeft(state)}
+        onSwipeRight={(state) => this.onSwipeRight(state)}
+        config={config}
+        style={styles.container}
+        >
         <Header navigation = {this.props.navigation} 
-        heading={this.params.title} 
+        title={this.params.title} 
         showFront = {true}
           onNextPress = {()=>{
-            this.props.navigation.push("GuideViewScreen",{
-              title: ALL_DATA[day].title,
-              day: ALL_DATA[day].day,
-              book: ALL_DATA[day].book,
-              subtitle: ALL_DATA[day].subtitle,
-              content: ALL_DATA[day].content,
-              insight: ALL_DATA[day].insight,
-              verse: ALL_DATA[day].verse
-            })
+            this.goToNextPage();
           }}
         />
         <ScrollView style={styles.container}>
@@ -108,7 +142,7 @@ class GuideViewScreen extends Component {
 
           <Text style={[styles.content,{ fontWeight: "600",}]}>INSIGHT</Text>
           <Text style={[styles.content,{ fontWeight: "400",}]}>{this.params.insight}</Text>
-          <Button
+          {/* <Button
           style = {{
             marginTop:20,
             marginBottom: 100,
@@ -120,7 +154,7 @@ class GuideViewScreen extends Component {
            })
           }}
           name="Comments"
-        />
+        /> */}
         </ScrollView>
         <Fab
           style={{
@@ -129,6 +163,7 @@ class GuideViewScreen extends Component {
             justifyContent:'flex-end',
             bottom:0
           }}
+          name = 'ios-add'
           onPress={() => {
             this.checkFav({
               userId:this.state.userId,
@@ -138,7 +173,8 @@ class GuideViewScreen extends Component {
           }}
         />
         
-      </View>
+     
+      </GestureRecognizer>
     );
   }
 }

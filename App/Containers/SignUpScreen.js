@@ -5,6 +5,7 @@ import Header from "../Components/Header";
 import Input from "../Components/Input";
 import firebase from "../Services/Firebase";
 import Button from "../Components/Button";
+import metrics from "../Themes/Metrics";
 
 export default class SignUpScreen extends Component {
   state = {
@@ -53,23 +54,39 @@ export default class SignUpScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "#fff" }}>
-        <Header navigation={this.props.navigation} heading={"Sign Up"} />
-
-        <Input onChangeText={this.onEmailChange} placeholder="Email" />
+        {/* <Header navigation={this.props.navigation} heading={"Sign Up"} /> */
+      }
+         
+         <View>
+           <Text style = {{fontFamily: "OpenSans",
+  fontSize: 18,
+  fontWeight: "bold",
+  fontStyle: "normal",
+  letterSpacing: 0,
+  color: "#000000",
+  alignSelf:'center',
+  marginTop:49
+  }}>Sign up</Text>
+         </View>
+        <Input style = {{marginTop:78}} onChangeText={this.onEmailChange} placeholder="Email" />
 
         <Input
+           style = {{marginTop:49.5}}
           secure={true}
           onChangeText={this.onPasswordChange}
           placeholder="Password"
+         
         />
 
         <Input
+        style = {{marginTop:49.5}}
           secure={true}
           onChangeText={this.onConfirmPasswordChange}
           placeholder="Confirm Password"
         />
 
         <Button
+        style = {{marginTop:30.5}}
           onPress={() => {
             this.signupWithEmailAndPassword(
               this.state.email,
@@ -82,7 +99,9 @@ export default class SignUpScreen extends Component {
 
         <TouchableOpacity
          style = {{
-           marginTop:30
+          position:'absolute',
+          bottom:0,
+          alignSelf:'center'
          }}
           onPress={() => {
             this.props.navigation.navigate("LoginScreen");
@@ -91,15 +110,15 @@ export default class SignUpScreen extends Component {
           <Text
             style={{
               fontFamily: "OpenSans",
-              fontSize: 18,
-              fontWeight: "500",
-              fontStyle: "normal",
-              letterSpacing: 1.4,
-              textAlign: "center",
-              color: "#000"
+  fontSize: 18,
+  fontWeight: "normal",
+  fontStyle: "normal",
+  letterSpacing: 0,
+  color: "#000000",
+ 
             }}
           >
-            Login here
+           Have an account? Sign in
           </Text>
         </TouchableOpacity>
       </View>

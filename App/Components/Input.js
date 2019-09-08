@@ -17,27 +17,29 @@ export default class Insight extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      
         <TextInput
                 textAlign={'left'}
                 style = {styles.input}
-                underlineColorAndroid="transparent"
-                placeholderTextColor="#939393"
+                underlineColorAndroid="#000"
+                placeholderTextColor="#000"
                 placeholder={this.props.placeholder}
                 secureTextEntry={this.props.secure}
-                style={{
-                  width: this.props.width?this.props.width: 260,
+                style={[{
+                  marginLeft:20,
+                  marginRight:21,
+//width: this.props.width?this.props.width: 260,
                   fontSize: 18,
                   height: 33,
                   padding: 0,
                   color: "#000",
-                  marginLeft:-30  
-                }}
+                 
+                },this.props.style]}
                 keyboardType = {this.props.inputType}
                 onChangeText={this.props.onChangeText}
                 value={this.props.value}
               />
-      </View>
+     
     )
   }
 }

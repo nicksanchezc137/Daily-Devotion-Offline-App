@@ -9,13 +9,14 @@ import LaunchScreen from '../Containers/LaunchScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import SignUpScreen from "../Containers/SignUpScreen"
 import styles from './Styles/NavigationStyles'
-
+import BibleTrivia from "../Containers/BibleTrivia"
 
 const Drawer = DrawerNavigator ({
   
   HomeScreen: { screen: HomeScreen },
   GuideViewScreen: { screen: GuideViewScreen },
   BookmarksScreen: { screen: BookmarksScreen },
+  
 },
 {
   contentComponent: SideMenu,
@@ -30,6 +31,7 @@ const PrimaryNav = StackNavigator({
   SplashScreen: { screen: SplashScreen },
   BookmarksScreen: { screen: BookmarksScreen },
   HomeScreen: { screen: Drawer },
+  BibleTrivia:{screen:BibleTrivia},
   LaunchScreen: { screen: LaunchScreen },
   LoginScreen:{screen:LoginScreen},
   SignUpScreen:{screen:SignUpScreen}

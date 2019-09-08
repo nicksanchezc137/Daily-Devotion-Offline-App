@@ -30,24 +30,7 @@ class SideMenu extends Component {
   render () {
     return (
       <View>
-        <View style = {{
-            backgroundColor:'#5D4037',
-            height:200,
-            justifyContent:'center'
-        }}>
-         <Text style = {{
-             fontFamily: "OpenSans",
-             fontSize: 20,
-             fontWeight: "600",
-             fontStyle: "normal",
-             lineHeight: 22,
-             letterSpacing: 0,
-             textAlign: "center",
-             color: "#ffffff"
-         }}>
-           Daily Devotion
-         </Text>
-        </View>
+        
         <ScrollView>
 
             <TouchableOpacity
@@ -68,7 +51,7 @@ class SideMenu extends Component {
              lineHeight: 22,
              letterSpacing: 0,
              textAlign: "center",
-             color: "#777"
+             color: "#000"
          }}>
           Home
          </Text>
@@ -94,9 +77,35 @@ class SideMenu extends Component {
              lineHeight: 22,
              letterSpacing: 0,
              textAlign: "center",
-             color: "#777"
+             color: "#000"
          }}>
           Favorite
+         </Text>
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+             onPress = {()=>{
+                 this.props.navigation.navigate('BibleTrivia')
+             }}
+
+             style = {{
+              alignItems:'center', justifyContent:'center', flexDirection:'row'
+            }}
+            >
+               
+            <Text style = {{
+             fontFamily: "OpenSans",
+             fontSize: 20,
+             marginTop:21,
+             fontWeight: "600",
+             fontStyle: "normal",
+             lineHeight: 22,
+             letterSpacing: 0,
+             textAlign: "center",
+             color: "#000"
+         }}>
+          Bible Trivia
          </Text>
             </TouchableOpacity>
 
@@ -120,7 +129,7 @@ class SideMenu extends Component {
              lineHeight: 22,
              letterSpacing: 0,
              textAlign: "center",
-             color: "#777"
+             color: "#000"
          }}>
           Login
          </Text>
@@ -148,7 +157,7 @@ class SideMenu extends Component {
              lineHeight: 22,
              letterSpacing: 0,
              textAlign: "center",
-             color: "#777"
+             color: "#000"
          }}>
           Logout
          </Text>

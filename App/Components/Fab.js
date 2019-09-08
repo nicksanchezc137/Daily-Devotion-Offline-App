@@ -25,7 +25,7 @@ export default class Fab extends Component {
       >
       <View style={styles.container}>
      
-        <Icon name = {'heart'} style={{fontSize: 24, color: '#fff'}} size = {24}/>
+        <Icon name = {this.props.name} style={{fontSize: 24, color: '#fff'}} size = {24}/>
       </View>
       </TouchableOpacity>
     )

@@ -9,12 +9,13 @@ import styles from "./Styles/HomeScreenStyle";
 import { ALL_DATA } from "../Services/Data";
 import DailyButton from "../Components/DailyButton";
 import Header from "../Components/Header";
+import { Colors } from "../Themes";
 
 class HomeScreen extends Component {
   componentWillMount() {
     console.log("The data is " + JSON.stringify(ALL_DATA));
-    StatusBar.setBarStyle( 'dark-content',true)
-    StatusBar.setBackgroundColor("#fff")
+    StatusBar.setBarStyle( 'light-content',true)
+    StatusBar.setBackgroundColor(Colors.background)
   }
 
   constructor(props) {
@@ -59,7 +60,7 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header hideBack = {true} heading="Home" />
+        <Header navigation = {this.props.navigation} showMenu = {true} hideBack = {true} heading="Home" />
         <ScrollView
           style={{ alignSelf: "center", flexDirection: "row" }}
           horizontal={true}>
