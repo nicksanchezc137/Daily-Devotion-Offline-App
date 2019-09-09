@@ -28,13 +28,14 @@ class SideMenu extends Component {
 
   render () {
     return (
-      <View>
+      <View style = {{flex:1}}>
         
         <ScrollView>
 
             <TouchableOpacity
               style = {{
-                alignItems:'center', justifyContent:'center', flexDirection:'row'
+                marginLeft:42,
+                marginTop:97
               }}
              onPress = {()=>{
                  this.props.navigation.navigate('HomeScreen')
@@ -43,14 +44,11 @@ class SideMenu extends Component {
 
             <Text style = {{
              fontFamily: "OpenSans",
-             fontSize: 20,
-             marginTop:21,
-             fontWeight: "600",
+             fontSize: 24,
+             fontWeight: "bold",
              fontStyle: "normal",
-             lineHeight: 22,
              letterSpacing: 0,
-             textAlign: "center",
-             color: "#000"
+             color: "#000000"
          }}>
           Home
          </Text>
@@ -58,25 +56,23 @@ class SideMenu extends Component {
          
 
             <TouchableOpacity
+            style = {{
+              marginTop:30,
+              marginLeft:42,
+            }}
              onPress = {()=>{
                  this.props.navigation.navigate('BookmarksScreen')
              }}
-
-             style = {{
-              alignItems:'center', justifyContent:'center', flexDirection:'row'
-            }}
             >
                
             <Text style = {{
              fontFamily: "OpenSans",
-             fontSize: 20,
-             marginTop:21,
-             fontWeight: "600",
+             fontSize: 24,
+             fontWeight: "bold",
              fontStyle: "normal",
-             lineHeight: 22,
              letterSpacing: 0,
-             textAlign: "center",
-             color: "#000"
+             color: "#000000"
+             
          }}>
           Favorite
          </Text>
@@ -84,27 +80,23 @@ class SideMenu extends Component {
 
 
             <TouchableOpacity
+            style = {{
+              marginTop:30,
+              marginLeft:42,
+            }}
              onPress = {()=>{
                  this.props.navigation.navigate('BibleTrivia')
              }}
-
-             style = {{
-              alignItems:'center', justifyContent:'center', flexDirection:'row'
-            }}
             >
-               
             <Text style = {{
              fontFamily: "OpenSans",
-             fontSize: 20,
-             marginTop:21,
-             fontWeight: "600",
+             fontSize: 24,
+             fontWeight: "bold",
              fontStyle: "normal",
-             lineHeight: 22,
              letterSpacing: 0,
-             textAlign: "center",
-             color: "#000"
+             color: "#000000"
          }}>
-          Bible Trivia
+          Discussion
          </Text>
             </TouchableOpacity>
 
@@ -115,27 +107,26 @@ class SideMenu extends Component {
              }}
 
              style = {{
-              alignItems:'center', justifyContent:'center', flexDirection:'row'
+              marginTop:30,
+              marginLeft:42,
             }}
             >
               
             <Text style = {{
              fontFamily: "OpenSans",
-             fontSize: 20,
-             marginTop:21,
-             fontWeight: "600",
+             fontSize: 24,
+             fontWeight: "bold",
              fontStyle: "normal",
-             lineHeight: 22,
              letterSpacing: 0,
-             textAlign: "center",
-             color: "#000"
+             color: "#000000"
          }}>
           Login
          </Text>
             </TouchableOpacity>: 
             <TouchableOpacity
             style = {{
-              alignItems:'center', justifyContent:'center', flexDirection:'row'
+              marginTop:30,
+              marginLeft:42,
             }}
              onPress = {()=>{
               firebase.auth().signOut().then(function() {
@@ -145,27 +136,34 @@ class SideMenu extends Component {
                 // An error happened.
               }); 
              }}
-            >
-               
+            > 
             <Text style = {{
              fontFamily: "OpenSans",
-             fontSize: 20,
-             marginTop:21,
-             fontWeight: "600",
+             fontSize: 24,
+             fontWeight: "bold",
              fontStyle: "normal",
-             lineHeight: 22,
              letterSpacing: 0,
-             textAlign: "center",
-             color: "#000"
+             color: "#000000"
          }}>
           Logout
          </Text>
-            </TouchableOpacity>}
-         
-        
+        </TouchableOpacity>}
          
         </ScrollView>
-        
+        <TouchableOpacity style = {{
+          position:'absolute',
+          bottom:0,
+          left:47
+        }}>
+        <Text style = {{
+           fontFamily: "OpenSans",
+           fontSize: 24,
+           fontWeight: "300",
+           fontStyle: "normal",
+           letterSpacing: 0,
+           color: "#000000"
+        }}>About</Text>
+        </TouchableOpacity>
       </View>
     );
   }
