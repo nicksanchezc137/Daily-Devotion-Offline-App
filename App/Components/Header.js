@@ -18,7 +18,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <View style={[styles.container,{backgroundColor:this.props.hideBack?Colors.background:Colors.white}]}>
+      <View style={[styles.container,{backgroundColor:this.props.hideBack || this.props.isComments?Colors.background:Colors.white}]}>
         <TouchableOpacity
           style={{ position: "absolute", left: 15, marginTop: 7 }}
           onPress={() => {
@@ -26,7 +26,7 @@ export default class Header extends Component {
           }}
         >
           {this.props.hideBack ? null : (
-            <Icon size={19.5} color="#343434" name="ios-arrow-back" />
+            <Icon size={19.5} color= {this.props.isComments?"#fff":"#343434"} name="ios-arrow-back" />
           )}
         </TouchableOpacity>
         <TouchableOpacity
@@ -39,13 +39,21 @@ export default class Header extends Component {
             <Icon size={19.5} style = {{color:'#fff'}} name="ios-menu" />
           )}
         </TouchableOpacity>
-        {!this.props.showMenu?
-        <Text style = {styles.title}>{this.props.title}</Text>
-        : <Image style = {{ width: 207,
+        {this.props.isComments?
+        <Image style = {{ width: 156,
           position:'absolute',
            top:5,
           left:'20%',
-    height: 42.4}}  source = {require('../Images/logo-white.png')}/>}
+          height: 49}}  source = {require('../Images/header2.png')}/>:null
+      }
+        {!this.props.showMenu?
+        <Text style = {styles.title}>{this.props.title}</Text>:!this.props.isComments?
+        <Image style = {{ width: 207,
+          position:'absolute',
+           top:5,
+          left:'20%',
+          height: 42.4}}  source = {require('../Images/logo-white.png')}/>:null
+        }
        
         <TouchableOpacity
           style={{ position: "absolute", right: 15, marginTop: 7 }}

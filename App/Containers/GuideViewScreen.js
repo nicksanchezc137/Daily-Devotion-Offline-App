@@ -12,6 +12,26 @@ import firebase from "../Services/Firebase";
 import { ALL_DATA } from "../Services/Data";
 import { Colors } from "../Themes";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import { FloatingAction } from "react-native-floating-action";
+
+const actions = [
+  {
+    text: "BookMark",
+    iconColor:"#fff",
+    iconName:'ios-bookmark',
+    name: "Bookmark",
+    position: 1
+  },
+  {
+    text: "Chat",
+    iconColor:"#fff",
+    iconName:'ios-chatbubbles',
+    name: "Chat",
+    position: 2
+  },
+  
+];
+
 class GuideViewScreen extends Component {
 
   constructor(props) {
@@ -111,11 +131,7 @@ class GuideViewScreen extends Component {
       directionalOffsetThreshold: 80
     };
     return (
-      <GestureRecognizer
-        onSwipe={(direction, state) => this.onSwipe(direction, state)}
-        onSwipeLeft={(state) => this.onSwipeLeft(state)}
-        onSwipeRight={(state) => this.onSwipeRight(state)}
-        config={config}
+      <View
         style={styles.container}
         >
         <Header navigation = {this.props.navigation} 
@@ -139,42 +155,35 @@ class GuideViewScreen extends Component {
           </View>
 
           <Text style={styles.content}>{this.params.content}</Text>
-
           <Text style={[styles.content,{ fontWeight: "600",}]}>INSIGHT</Text>
           <Text style={[styles.content,{ fontWeight: "400",}]}>{this.params.insight}</Text>
-          {/* <Button
-          style = {{
-            marginTop:20,
-            marginBottom: 100,
-          }}
-          onPress={() => {
-           this.props.navigation.navigate("CommentsScreen",{
-            title:this.params.title,
-            day:this.params.day
-           })
-          }}
-          name="Comments"
-        /> */}
+        
         </ScrollView>
-        <Fab
-          style={{
-            alignSelf: "flex-end",
-            position:'absolute',
-            justifyContent:'flex-end',
-            bottom:0
-          }}
-          name = 'ios-add'
-          onPress={() => {
-            this.checkFav({
-              userId:this.state.userId,
-              day:this.params.day,
-              title:this.params.title,
-            })
-          }}
-        />
+       
+
+        <FloatingAction
+    actions={actions}
+    onPressItem={name => {
+      //console.warn(`selected button: ${name}`);
+      //alert(`selected button: ${name}`);
+      if(name == "Chat"){
+           this.props.navigation.navigate('CommentsScreen',{
+            day:this.params.day,
+            title:this.params.title,
+           })
+      }else{
+        this.checkFav({
+          userId:this.state.userId,
+          day:this.params.day,
+          title:this.params.title,
+        })
+      }
+    }}
+  />
+
         
      
-      </GestureRecognizer>
+      </View>
     );
   }
 }

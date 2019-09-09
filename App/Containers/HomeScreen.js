@@ -3,7 +3,6 @@ import { ScrollView, View, Text, StatusBar } from "react-native";
 import { connect } from "react-redux";
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-
 // Styles
 import styles from "./Styles/HomeScreenStyle";
 import { ALL_DATA } from "../Services/Data";
@@ -30,11 +29,9 @@ class HomeScreen extends Component {
         user:this.params.user
       })
     }
-
   }
   renderDailyButton() {
-    return ALL_DATA.map((item, index) => {
-     
+    return ALL_DATA.map((item, index) => {  
       return (
         <DailyButton
           title={item.title}
@@ -66,8 +63,8 @@ class HomeScreen extends Component {
           horizontal={true}>
           {this.renderDailyButton()}
         </ScrollView>
-        <ScrollView
-          horizontal={true}>
+        <ScrollView>
+
         </ScrollView>
       </View>
     );

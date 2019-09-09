@@ -20,14 +20,18 @@ export default class Content extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style = {styles.txt_container}>
+        <Text style = {styles.name}>{this.props.name}</Text>
         <Text style = {styles.text}>{this.props.comment}</Text>
+        </View>
+        
 
         <View style={styles.vote_section}>
           <TouchableOpacity
            onPress = {this.props.onUpVote}
           >
              {!this.props.isDownVoted?
-            <Icon name="arrow-dropup" size={30} color="#343434" />: <Icon name="arrow-dropup" size={30} color="#999" />}
+            <Icon name="ios-arrow-up" size={30} color="#343434" />: <Icon name="ios-arrow-up" size={30} color="#999" />}
           </TouchableOpacity>
    
           <Text style = {styles.num}>{this.props.vote}</Text>
@@ -35,7 +39,7 @@ export default class Content extends Component {
             onPress = {this.props.onDownVote}
           >
             {!this.props.isUpVoted?
-            <Icon name="arrow-dropdown" size={30} color="#343434" />: <Icon name="arrow-dropdown" size={30} color="#999" />}
+            <Icon name="ios-arrow-down" size={30} color="#343434" />: <Icon name="ios-arrow-down" size={30} color="#999" />}
           </TouchableOpacity>
         </View>
       </View>

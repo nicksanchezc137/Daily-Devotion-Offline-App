@@ -33,6 +33,7 @@
     "react-firebase": "^2.2.8",
     "react-native": "0.55.1",
     "react-native-config": "^0.10.0",
+    "react-native-floating-action": "^1.19.1",
     "react-native-swipe-gestures": "^1.0.3",
     "react-navigation": "^1.5.11",
     "react-navigation-redux-helpers": "^1.0.4",

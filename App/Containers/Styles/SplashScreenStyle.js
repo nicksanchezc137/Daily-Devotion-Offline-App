@@ -10,7 +10,8 @@ export default StyleSheet.create({
     justifyContent:'center',
     alignSelf:'center',
     backgroundColor:Colors.white,
-    height:metrics.deviceHeight
+    height:metrics.deviceHeight,
+    width:metrics.deviceWidth
   },
   logo:{
     width: 372,

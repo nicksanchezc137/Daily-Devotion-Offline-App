@@ -11,6 +11,7 @@ import firebase from "../Services/Firebase";
 import Button from "../Components/Button";
 import Header from "../Components/Header";
 import Comment from "../Components/Comment";
+import Fab from "../Components/Fab";
 
 class CommentsScreen extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class CommentsScreen extends Component {
       comments_array: [],
       comment_id_array: [],
       can_trigger_on_scroll: true,
-      limit: 7,
+      limit: 15,
       last_id: 1000000,
       comment_id: 0
     };
@@ -307,6 +308,7 @@ class CommentsScreen extends Component {
         <Comment
           key={index}
           vote={comment.vote}
+          name = {'@nathan'}
           comment={comment.comment}
           onUpVote={() => {
             if (userId) {
@@ -362,15 +364,17 @@ class CommentsScreen extends Component {
       <View style={styles.container}>
         
         <Header
+          isComments = {true}
+          showMenu = {true} hideBack = {true}
           navigation={this.props.navigation}
           heading={this.params.title}
         />
-        <Input
+       {/* <Input
           onChangeText={this.onCommentChange}
           placeholder="Write Comment"
           value={this.state.comment}
         />
-        <Button
+         <Button
           name="Comment"
           onPress={() =>
             this.createComment({
@@ -382,12 +386,28 @@ class CommentsScreen extends Component {
               id: this.state.comment_id
             })
           }
-        />
+        /> */}
         <ScrollView onScroll={this.handleScroll}>
           <View style={{ alignItems: "center", justifyContent: "center" }}>
             {this.renderComments()}
           </View>
         </ScrollView>
+        <Fab
+          style={{
+            alignSelf: "flex-end",
+            position:'absolute',
+            justifyContent:'flex-end',
+            bottom:0
+          }}
+          name = 'ios-add'
+          onPress={() => {
+            // this.checkFav({
+            //   userId:this.state.userId,
+            //   day:this.params.day,
+            //   title:this.params.title,
+            // })
+          }}
+        />
       </View>
     );
   }
@@ -423,7 +443,6 @@ class CommentsScreen extends Component {
 const mapStateToProps = state => {
   return {};
 };
-
 const mapDispatchToProps = dispatch => {
   return {};
 };

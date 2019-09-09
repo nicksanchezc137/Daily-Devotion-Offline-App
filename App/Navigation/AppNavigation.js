@@ -12,18 +12,15 @@ import styles from './Styles/NavigationStyles'
 import BibleTrivia from "../Containers/BibleTrivia"
 
 const Drawer = DrawerNavigator ({
-  
   HomeScreen: { screen: HomeScreen },
   GuideViewScreen: { screen: GuideViewScreen },
   BookmarksScreen: { screen: BookmarksScreen },
-  
 },
 {
   contentComponent: SideMenu,
   drawerWidth: 300
 }
 );
-
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   GuideViewScreen: { screen: GuideViewScreen },

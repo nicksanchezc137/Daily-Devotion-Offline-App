@@ -12,7 +12,6 @@ class SideMenu extends Component {
       isLoggedIn:false
     }
   }
-
   componentWillMount(){
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
