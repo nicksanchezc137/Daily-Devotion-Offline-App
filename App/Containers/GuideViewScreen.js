@@ -13,6 +13,7 @@ import { ALL_DATA } from "../Services/Data";
 import { Colors } from "../Themes";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { FloatingAction } from "react-native-floating-action";
+import {setDay} from '../Redux/actions/counterAction'
 
 const actions = [
   {
@@ -42,6 +43,7 @@ class GuideViewScreen extends Component {
     }
   }
   componentWillMount(){
+    this.props.setDay(this.params.day);
     StatusBar.setBarStyle( 'dark-content',true)
     StatusBar.setBackgroundColor(Colors.white)
     firebase.auth().onAuthStateChanged(user => {
@@ -59,6 +61,7 @@ class GuideViewScreen extends Component {
   componentWillUnmount(){
     StatusBar.setBarStyle( 'light-content',true)
     StatusBar.setBackgroundColor(Colors.background)
+    //console.warn('the object is ', this.props.dayCounter)
   }
   checkFav(data) {
     firebase
@@ -113,6 +116,7 @@ class GuideViewScreen extends Component {
 
   goToNextPage (){
     const {day} = this.params
+
     this.props.navigation.push("GuideViewScreen",{
       title: ALL_DATA[day].title,
       day: ALL_DATA[day].day,
@@ -171,6 +175,7 @@ class GuideViewScreen extends Component {
             day:this.params.day,
             title:this.params.title,
            })
+         
       }else{
         this.checkFav({
           userId:this.state.userId,
@@ -189,11 +194,19 @@ class GuideViewScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+ console.log('store data is ', state)
+  return {
+    dayCounter: state.dayCounter,
+
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    setDay: (day) => {
+      dispatch(setDay(day))
+    }
+  };
 };
 
 export default connect(

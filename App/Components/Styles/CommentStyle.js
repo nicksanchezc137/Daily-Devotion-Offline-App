@@ -32,7 +32,7 @@ export default StyleSheet.create({
   text:{
     fontFamily: "OpenSans",
   fontSize: 18,
-  fontWeight: "bold",
+  fontWeight: "200",
   fontStyle: "normal",
   letterSpacing: 0,
   color: "#000000",

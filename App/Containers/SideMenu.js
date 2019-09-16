@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import {ScrollView, Text, View, TouchableOpacity, Image, Button, Platform, AsyncStorage} from 'react-native';
 import {Icon} from 'native-base';
 import firebase from "../Services/Firebase";
+import { connect } from "react-redux";
+//redux actions
+import {setLoggedIn, setUserName,setFuid} from '../Redux/actions/userInfoAction';
+
 class SideMenu extends Component {
   constructor(props) {
     super(props);
@@ -13,16 +17,7 @@ class SideMenu extends Component {
     }
   }
   componentWillMount(){
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log("the user is " + JSON.stringify(user));
-        this.setState({
-          isLoggedIn : true,
-        });
-      } else {
-        //alert("Please login to access your bookmarks")
-      }
-    });
+    console.warn(`user in sidemenu is ${this.props.userInfo}`)
   }
   
 
@@ -85,7 +80,7 @@ class SideMenu extends Component {
               marginLeft:42,
             }}
              onPress = {()=>{
-                 this.props.navigation.navigate('BibleTrivia')
+                 this.props.navigation.navigate('BibleTrivia',{day:1})
              }}
             >
             <Text style = {{
@@ -100,7 +95,7 @@ class SideMenu extends Component {
          </Text>
             </TouchableOpacity>
 
-           {!this.state.isLoggedIn?
+           {!this.props.userInfo.loggedIn?
             <TouchableOpacity
              onPress = {()=>{
                  this.props.navigation.navigate('LoginScreen')
@@ -129,11 +124,14 @@ class SideMenu extends Component {
               marginLeft:42,
             }}
              onPress = {()=>{
-              firebase.auth().signOut().then(function() {
+              firebase.auth().signOut().then(()=> {
+                this.props.setLoggedIn(false);
+                this.props.setFuid("");
+                this.props.setUserName("no-name")
                 // Sign-out successful.
                 alert("Logged Out")
-              }).catch(function(error) {
-                // An error happened.
+              }).catch((error)=> {
+                console.log(error)
               }); 
              }}
             > 
@@ -172,5 +170,28 @@ class SideMenu extends Component {
 SideMenu.propTypes = {
   navigation: PropTypes.object
 };
+const mapStateToProps = state => {
+  console.log('user obj in sidemenu is ', state.userInfo)
+  return {
+    userInfo:state.userInfo
+  };
+};
 
-export default SideMenu;
+const mapDispatchToProps = dispatch => {
+  return {
+    setLoggedIn: (status) => {
+      dispatch(setLoggedIn(status))
+    },
+    setUserName: (name) => {
+      dispatch(setUserName(name))
+    },
+    setFuid: (fuid) => {
+      dispatch(setFuid(fuid))
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SideMenu);

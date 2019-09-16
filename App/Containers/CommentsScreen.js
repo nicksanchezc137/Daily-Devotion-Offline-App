@@ -12,6 +12,8 @@ import Button from "../Components/Button";
 import Header from "../Components/Header";
 import Comment from "../Components/Comment";
 import Fab from "../Components/Fab";
+//redux actions
+import {setLoggedIn, setUserName,setFuid} from '../Redux/actions/userInfoAction';
 
 class CommentsScreen extends Component {
   constructor(props) {
@@ -33,16 +35,6 @@ class CommentsScreen extends Component {
   componentWillMount() {
     this.fetchItems();
     this.getCommentsCount();
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log("the user is " + JSON.stringify(user));
-        this.setState({
-          userId: user.uid,
-          email: user.email
-        });
-      } else {
-      }
-    });
   }
   componentWillUnmount(){
    
@@ -439,14 +431,27 @@ class CommentsScreen extends Component {
     }
   }
 }
-
 const mapStateToProps = state => {
-  return {};
-};
-const mapDispatchToProps = dispatch => {
-  return {};
+  console.log('user obj in login is ', state.userInfo)
+  return {
+    userInfo:state.userInfo
+  };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  
+  return {
+    setLoggedIn: (status) => {
+      dispatch(setLoggedIn(status))
+    },
+    setUserName: (name) => {
+      dispatch(setUserName(name))
+    },
+    setFuid: (fuid) => {
+      dispatch(setFuid(fuid))
+    }
+  }
+}
 export default connect(
   mapStateToProps,
   mapDispatchToProps

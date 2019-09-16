@@ -19,16 +19,11 @@ class HomeScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.params = this.props.navigation.state.params;
-    this.state = {
-      isLoggedIn:this.params.isLoggedIn,
-      user:{}
-    }
-    if(this.params.isLoggedIn){
-      this.setState({
-        user:this.params.user
-      })
-    }
+    
+  }
+  componentWillMount(){
+    
+    console.log(`user logged in is ${this.props.userInfo}`);
   }
   renderDailyButton() {
     return ALL_DATA.map((item, index) => {  
@@ -72,7 +67,9 @@ class HomeScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    userInfo:state.userInfo
+  };
 };
 
 const mapDispatchToProps = dispatch => {

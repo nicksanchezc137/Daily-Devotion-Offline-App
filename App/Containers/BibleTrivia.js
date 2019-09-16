@@ -5,6 +5,7 @@ import Input from "../Components/Input";
 import firebase from "../Services/Firebase";
 import Button from "../Components/Button";
 import Header from "../Components/Header";
+import Comment from '../Components/Comment'
 // Styles
 import styles from './Styles/TriviaStyles'
 

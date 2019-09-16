@@ -5,8 +5,12 @@ import Header from "../Components/Header";
 import Input from "../Components/Input";
 import firebase from "../Services/Firebase";
 import Button from "../Components/Button";
+import { connect } from "react-redux";
+import metrics from "../Themes/Metrics";
+//redux actions
+import {setLoggedIn, setUserName,setFuid} from '../Redux/actions/userInfoAction';
 
-export default class LoginScreen extends Component {
+ class LoginScreen extends Component {
   state = {
     email: "",
     password: "",
@@ -18,13 +22,12 @@ export default class LoginScreen extends Component {
     } catch (error) {}
   }
   onEmailChange = email => {
-    this.setState({ email: email });
+    this.setState({email });
   };
   onPasswordChange = password => {
-    this.setState({ password: password });
+    this.setState({ password });
   };
  
-
   signInWithEmail(email, password) {
     console.log("the email and passwords are ", email.trim(), password.trim());
     if (email.trim() && password.trim()) {
@@ -33,10 +36,10 @@ export default class LoginScreen extends Component {
         .signInWithEmailAndPassword(email.trim(), password.trim())
         .then(user => {
           // let user = firebase.auth().currentUser;
-          console.log("the user is " + user);
-          this.props.navigation.navigate("HomeScreen", {
-            isLoggedIn: true
-          });
+          console.log("the user is ",user.user.uid);
+          this.props.setLoggedIn(true);
+          this.props.setFuid(user.user.uid)
+          this.props.navigation.navigate("HomeScreen");
         })
         .catch(error => {
           // Handle Errors here.
@@ -50,7 +53,7 @@ export default class LoginScreen extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <View style={{ flex:1, backgroundColor: "#fff" }}>
         {/* <Header navigation={this.props.navigation} heading={"Login"} /> */}
         <View>
            <Text style = {{fontFamily: "OpenSans",
@@ -91,7 +94,7 @@ export default class LoginScreen extends Component {
             alignSelf:'center'
           }}
           onPress={() => {
-            
+            this.props.navigation.navigate("ResetPassword")
           }}
         >
           <Text
@@ -137,3 +140,28 @@ export default class LoginScreen extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  console.log('user obj in login is ', state.userInfo)
+  return {
+    userInfo:state.userInfo
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  
+  return {
+    setLoggedIn: (status) => {
+      dispatch(setLoggedIn(status))
+    },
+    setUserName: (name) => {
+      dispatch(setUserName(name))
+    },
+    setFuid: (fuid) => {
+      dispatch(setFuid(fuid))
+    }
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen);

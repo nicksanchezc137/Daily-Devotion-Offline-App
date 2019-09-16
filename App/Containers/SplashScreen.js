@@ -7,6 +7,9 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/SplashScreenStyle'
 import firebase from "../Services/Firebase";
+
+//redux actions
+import {setLoggedIn,fetchSetName, setUserName,setFuid} from '../Redux/actions/userInfoAction';
 class SplashScreen extends Component {
   componentWillMount(){
    this.checkIfLoggedIn()
@@ -23,26 +26,20 @@ class SplashScreen extends Component {
       </ScrollView>
     )
   }
-  goToHome(user){
-    if(user){
-      this.props.navigation.navigate("HomeScreen",{
-        isLoggedIn:true,
-        user:user
-      });
-    }else{
-      this.props.navigation.navigate("HomeScreen",{
-        isLoggedIn:false,
-      });
-    }
-    
+  goToHome(){
+    this.props.navigation.navigate("HomeScreen"); 
   }
+
   checkIfLoggedIn(){
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('user logged')
-        this.goToHome(user);
+        console.log('user obj splash is ', user)
+        this.props.setLoggedIn(true);
+        this.props.setFuid(user.uid);
+        this.props.fetchSetName(user.uid);
+        this.goToHome();
       }else{
-        this.goToHome(null);
+        this.goToHome();
       }
    });
   }
@@ -51,12 +48,27 @@ class SplashScreen extends Component {
 
 
 const mapStateToProps = (state) => {
+  console.log('store data is ', state)
   return {
+    userInfo:state.userInfo
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
+
   return {
+    setLoggedIn: (status) => {
+      dispatch(setLoggedIn(status))
+    },
+    setUserName: (name) => {
+      dispatch(setUserName(name))
+    },
+    setFuid: (fuid) => {
+      dispatch(setFuid(fuid))
+    },
+    fetchSetName: (fuid) => {
+      dispatch(fetchSetName(fuid))
+    }
   }
 }
 

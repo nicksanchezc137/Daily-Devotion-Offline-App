@@ -10,11 +10,12 @@ import LoginScreen from '../Containers/LoginScreen'
 import SignUpScreen from "../Containers/SignUpScreen"
 import styles from './Styles/NavigationStyles'
 import BibleTrivia from "../Containers/BibleTrivia"
+import ResetPassword from "../Containers/ResetPassword"
 
 const Drawer = DrawerNavigator ({
   HomeScreen: { screen: HomeScreen },
-  GuideViewScreen: { screen: GuideViewScreen },
-  BookmarksScreen: { screen: BookmarksScreen },
+  CommentsScreen: { screen: CommentsScreen },
+ 
 },
 {
   contentComponent: SideMenu,
@@ -23,15 +24,15 @@ const Drawer = DrawerNavigator ({
 );
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  GuideViewScreen: { screen: GuideViewScreen },
-  CommentsScreen: { screen: CommentsScreen },
-  SplashScreen: { screen: SplashScreen },
-  BookmarksScreen: { screen: BookmarksScreen },
   HomeScreen: { screen: Drawer },
+  SplashScreen: { screen: SplashScreen },
   BibleTrivia:{screen:BibleTrivia},
+  GuideViewScreen: { screen: GuideViewScreen },
+  BookmarksScreen: { screen: BookmarksScreen },
   LaunchScreen: { screen: LaunchScreen },
   LoginScreen:{screen:LoginScreen},
-  SignUpScreen:{screen:SignUpScreen}
+  SignUpScreen:{screen:SignUpScreen},
+  ResetPassword: { screen: ResetPassword },
 }, {
   // Default config for all screens
   headerMode: 'none',
